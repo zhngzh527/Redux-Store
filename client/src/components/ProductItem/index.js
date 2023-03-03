@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { pluralize } from "../../utils/helpers"
+// commented out in favor of redux logic
+// import { useStoreContext } from "../../utils/GlobalState";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 
 function ProductItem(item) {
+    // commented out in favor of redux logic
+  // const [state, dispatch] = useStoreContext();
   const [state, dispatch] = useStoreContext();
 
   const {
