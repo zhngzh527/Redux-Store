@@ -53,6 +53,7 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     checkout: async (parent, args, context) => {
+      // parse out referring URL
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products });
       const line_items = [];
@@ -63,6 +64,12 @@ const resolvers = {
         const product = await stripe.products.create({
           name: products[i].name,
           description: products[i].description,
+          /*
+          Because we have access to the referring URL, 
+          we can also provide an image thumbnail when 
+          creating the product ID.
+          This is to pass the images to the stripe products array
+          */
           images: [`${url}/images/${products[i].image}`]
         });
 
